@@ -32,5 +32,8 @@ export interface Call {
   time: string;
   phoneNumber: number;
   duration: number;
-  
+}
+export enum PhoneAction {
+  Add = "Add",
+  Delete = "Delete",
 }

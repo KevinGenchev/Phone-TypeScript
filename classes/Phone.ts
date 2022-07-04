@@ -1,14 +1,15 @@
-import { BatteryModel, DisplayModel, PhoneModel } from "../models/models";
+import { BatteryModel, DisplayModel, PhoneModel, PhoneAction } from "../models/models";
 import { PhoneCall } from "./Call";
 
 export class Phone implements PhoneModel {
+ 
+  public performedCalls: any[];
   private _model: string;
   private _manufacturer: string;
   private _price: number;
   private _owner: string;
   private _battery: BatteryModel;
   private _display: DisplayModel;
-  public performedCalls: any[];
 
   get model(): string {
     return this._model;
@@ -49,25 +50,25 @@ export class Phone implements PhoneModel {
     this._display = display;
     this.performedCalls = [];
   }
-  // Information for phone calls
+  
   public phoneInfo(): string {
     let information = `Model: ${this._model}\nManufacturer:${this._manufacturer}`;
-    if (this._price !== undefined || null) {
+    if (this._price) {
       information += `\nPrice: ${this._price}`;
     }
-    if (this._owner !== undefined || null) {
+    if (this._owner) {
       information += `\nOwner: ${this._owner}`;
     }
-    if (this._battery !== undefined || null) {
+    if (this._battery) {
       information += `\nBattery:\n Model: ${this._battery.model}\n hoursId: ${this._battery.hoursIdle}\n hoursTalk: ${this._battery.hoursTalk}`;
     }
-    if (this._display !== undefined || null) {
+    if (this._display) {
       information += `\nDisplay:\n colors:${this._display.colors}\n size: ${this._display.size}`;
     }
 
     return information;
   }
-  // Make a call
+  
   public makeCall(): any {
     const date = new Date();
     const time = `${date.getHours()}:${
@@ -87,23 +88,19 @@ export class Phone implements PhoneModel {
     this.performedCalls.push(callHistoryObj);
     console.log(callHistoryObj);
   }
-  // Adding calls
-  public addPerformedCalls(actions: string): string[] {
-    const Add = "Add";
-    if (Add === actions) {
-      this.performedCalls.push(this.performedCalls);
+  
+  public addAndDeletePerformedCalls(currentActions: string):void {
+    if (PhoneAction.Add === currentActions) {
+      this.performedCalls.push(this.makeCall());
     }
-    return this.performedCalls;
+    if(PhoneAction.Delete === currentActions){
+      this.performedCalls.pop()
+    } 
   }
-  // Clear call history information
+  
   public clearPerformedCalls(): void {
     this.performedCalls = [];
     console.log("Removed")
-  }
-  // Remove the last element from call history
-  public deletPerformedCalls(params): any {
-    this.addPerformedCalls(params).pop();
-    return this.addPerformedCalls(params);
   }
 
   public totalPrice(): void{
