@@ -1,4 +1,3 @@
-import { remove } from "lodash";
 import { Call } from "../models/models";
 
 export class PhoneCall implements Call {
@@ -20,13 +19,10 @@ export class PhoneCall implements Call {
     return this._duration;
   }
 
-  constructor(date:Date, time: string, phoneNumber: number, duration: number) {
+  constructor(date: Date, time: string, phoneNumber: number, duration: number) {
     this._date = date;
     this._time = time;
     this._phoneNumber = phoneNumber;
     this._duration = duration;
   }
-
-  
 }
-

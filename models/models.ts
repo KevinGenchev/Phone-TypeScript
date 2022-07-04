@@ -33,7 +33,3 @@ export interface Call {
   phoneNumber: number;
   duration: number;
 }
-export enum PhoneAction {
-  Add = "Add",
-  Delete = "Delete",
-}

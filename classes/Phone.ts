@@ -1,8 +1,7 @@
-import { BatteryModel, DisplayModel, PhoneModel, PhoneAction } from "../models/models";
+import { BatteryModel, DisplayModel, PhoneModel } from "../models/models";
 import { PhoneCall } from "./Call";
 
 export class Phone implements PhoneModel {
- 
   public performedCalls: any[];
   private _model: string;
   private _manufacturer: string;
@@ -50,7 +49,7 @@ export class Phone implements PhoneModel {
     this._display = display;
     this.performedCalls = [];
   }
-  
+
   public phoneInfo(): string {
     let information = `Model: ${this._model}\nManufacturer:${this._manufacturer}`;
     if (this._price) {
@@ -68,7 +67,7 @@ export class Phone implements PhoneModel {
 
     return information;
   }
-  
+
   public makeCall(): any {
     const date = new Date();
     const time = `${date.getHours()}:${
@@ -88,27 +87,26 @@ export class Phone implements PhoneModel {
     this.performedCalls.push(callHistoryObj);
     console.log(callHistoryObj);
   }
-  
-  public addAndDeletePerformedCalls(currentActions: string):void {
-    if (PhoneAction.Add === currentActions) {
-      this.performedCalls.push(this.makeCall());
-    }
-    if(PhoneAction.Delete === currentActions){
-      this.performedCalls.pop()
-    } 
-  }
-  
-  public clearPerformedCalls(): void {
-    this.performedCalls = [];
-    console.log("Removed")
+
+  public addCalls(): any {
+    this.makeCall();
   }
 
-  public totalPrice(): void{
-    if(this.performedCalls.length < 1){
-      console.log("No cals made by this phone")
-      return 
+  public clearPerformedCalls(): void {
+    this.performedCalls = [];
+    console.log("Removed");
+  }
+
+  public deleteCalls(): void {
+    this.performedCalls.pop();
+  }
+
+  public totalPrice(): void {
+    if (this.performedCalls.length < 1) {
+      console.log("No cals made by this phone");
+      return;
     }
-    const minutePrice = 0.50;
+    const minutePrice = 0.5;
     let totalSec = 0;
 
     this.performedCalls.forEach((calls) => (totalSec += calls.duration));
@@ -116,4 +114,3 @@ export class Phone implements PhoneModel {
     console.log(`Total Price in the calls is ${finalSum}lv`);
   }
 }
-

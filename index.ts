@@ -1,9 +1,7 @@
-import { PhoneCall } from "./classes/Call";
 import { Phone } from "./classes/Phone";
-import { BatteryType, Call } from "./models/models";
+import { BatteryType } from "./models/models";
 
 function main() {
-  // const call: PhoneCall = new PhoneCall()
   const phone: Phone = new Phone(
     "3310",
     "Nokia",
@@ -19,38 +17,28 @@ function main() {
       colors: 26,
     }
   );
-  // console.log(phone.owner);
 
   console.log(phone.phoneInfo());
-  phone.makeCall()
-  phone.makeCall()
-  phone.makeCall()
-  phone.makeCall()
 
-  // phone.addPerformedCalls();
+  console.log("Make 2 calls:");
+  phone.makeCall();
+  phone.makeCall();
+
+  phone.totalPrice();
+  console.log("History:");
 
   phone.clearPerformedCalls();
-  console.log("removed?");
-  phone.makeCall()
-  console.log("////////////////////////////");
-  
-  console.log ("+++++++++++++++++++++++")
+  console.log("History:");
 
-  // console.log(phone.phoneInfo());
-  // phone.makeCall();
-  // phone.makeCall();
-  // phone.makeCall();
-  // phone.makeCall();
-  // console.log(phone.addPerformedCalls());
-  // console.log(phone.deletPerformedCalls())
-  // phone.clearPerformedCalls();
-  // console.log("removed?");
-  // phone.makeCall();
-  // console.log(phone.addPerformedCalls());
-  // console.log("////////////////////////////");
-  // console.log("+++++++++++++++++++++++");
-  
-  
+  console.log("Make 3 calls:");
+  phone.makeCall();
+  phone.makeCall();
+  phone.makeCall();
+
+  console.log("Add a call:");
+  phone.addCalls();
+
+  console.log("History:");
+  phone.totalPrice();
 }
-
 main();
